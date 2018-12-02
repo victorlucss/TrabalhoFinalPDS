@@ -5,6 +5,7 @@ import br.ufc.pds.entity.Tabuleiro;
 import br.ufc.pds.entity.campo.Campo;
 import br.ufc.pds.entity.campo.EfeitoEspecial;
 import br.ufc.pds.entity.jogador.Banco;
+import br.ufc.pds.entity.jogador.Jogador;
 import br.ufc.pds.entity.jogador.JogadorHumano;
 import br.ufc.pds.pojo.Dado;
 import br.ufc.pds.pojo.Peca;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControlBancoImobiliario {
+	private static ControlBancoImobiliario controlBancoImobiliario = new ControlBancoImobiliario();
 
 	private Map<Integer, JogadorHumano> jogadoresAtivos;
 	private Map<Integer,JogadorHumano> jogadoresPresos;
@@ -21,11 +23,15 @@ public class ControlBancoImobiliario {
 	private int numJogadores;
 	private Banco banco;
 
-	public ControlBancoImobiliario() {
+	private ControlBancoImobiliario() {
 		this.jogadoresAtivos = new HashMap<>();
 		this.jogadoresPresos = new HashMap<>();
 		this.banco = Banco.getInstance();
 		this.tabuleiro = new Tabuleiro();
+	}
+
+	public static synchronized ControlBancoImobiliario getInstance(){
+		return controlBancoImobiliario;
 	}
 
 	public void jogar() {
@@ -55,8 +61,8 @@ public class ControlBancoImobiliario {
 
 		jogador.getPeca().obterLocalizacao().removerJogador(jogador); //Remove o jogador do campo em que ele estava
 
-		//Campo proximoCampo = this.tabuleiro.obterProximoCampo(jogador.getPeca().obterLocalizacao(), valorDados);
-		Campo proximoCampo = this.tabuleiro.obterProximoCampo(this.tabuleiro.obterCampoInicial(), 2);
+		Campo proximoCampo = this.tabuleiro.obterProximoCampo(jogador.getPeca().obterLocalizacao(), valorDados);
+		//Campo proximoCampo = this.tabuleiro.obterProximoCampo(this.tabuleiro.obterCampoInicial(), 2); // NÃO REMOVERLinha usada apenas para testes
 		jogador.getPeca().mudarLocalizacao(proximoCampo);
 		Teste.informaAvancoJogador(jogador);//remover-------------------------------------------
 
@@ -65,7 +71,7 @@ public class ControlBancoImobiliario {
 		try {
 			this.executaAcaoCampo((EfeitoEspecial) proximoCampo, jogador); //Aciona o efeito especial para o Jogador...
 		} catch (ClassCastException e) {
-			System.out.println("Campo sem Ação!");
+			System.out.println("Campo sem Ação!"); // Caso caia em Paradav Livre
 		}
 	}
 
@@ -76,20 +82,21 @@ public class ControlBancoImobiliario {
 		}
 	}
 
-	public Map<Integer,JogadorHumano> obterJogadores() {
-		return null;
+	public void prenderJogador(JogadorHumano jogador) {
+		this.tabuleiro.buscarCampo(11).addJogador(jogador); // 11 é o índice da prisão
+		this.jogadoresPresos.put(jogador.getId(), jogador);
 	}
 
-	public void adicionarJogador() {
-
+	public void soltarJogador(JogadorHumano jogador) {
+		this.tabuleiro.buscarCampo(11).removerJogador(jogador); // 11 é o índice da prisão
+		this.jogadoresPresos.remove(jogador);
 	}
 
-	public void prenderJogador() {
-
+	public Map getJogadoresPresos() {
+		return this.jogadoresPresos;
 	}
 
-	public void soltarJogador() {
-
+	public Map getJogadoresAtivos() {
+		return this.jogadoresAtivos;
 	}
-
 }

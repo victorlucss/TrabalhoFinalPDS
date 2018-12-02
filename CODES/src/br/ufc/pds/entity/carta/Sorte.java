@@ -4,8 +4,6 @@ import br.ufc.pds.entity.jogador.Banco;
 import br.ufc.pds.entity.jogador.JogadorHumano;
 
 public class Sorte extends CartaSorteOuReves {
-
-
 	public Sorte(String titulo, String descricao, float valor) {
 		super(titulo, descricao, valor);
 	}

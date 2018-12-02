@@ -32,4 +32,9 @@ public class Tabuleiro {
         ControlCampos controlCampos = new ControlCampos();
         this.campos = controlCampos.criarCampos();
     }
+
+    public Campo buscarCampo(int indice) {
+        return this.campos.get(indice);
+    }
+
 }

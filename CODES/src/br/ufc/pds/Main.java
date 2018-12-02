@@ -4,7 +4,7 @@ import br.ufc.pds.controller.ControlBancoImobiliario;
 
 public class Main {
     public static void main (String args[]) {
-        ControlBancoImobiliario controlBancoImobiliario = new ControlBancoImobiliario();
+        ControlBancoImobiliario controlBancoImobiliario = ControlBancoImobiliario.getInstance();
         controlBancoImobiliario.jogar();
     }
 }
