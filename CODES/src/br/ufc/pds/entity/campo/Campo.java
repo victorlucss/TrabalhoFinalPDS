@@ -26,6 +26,7 @@ public abstract class Campo {
 
 	public void addJogador(JogadorHumano jogadorHumano) {
 		this.listaJogadores.add(jogadorHumano);
+		jogadorHumano.getPeca().mudarLocalizacao(this);
 	}
 
 	public void removerJogador(JogadorHumano jogadorHumano) {

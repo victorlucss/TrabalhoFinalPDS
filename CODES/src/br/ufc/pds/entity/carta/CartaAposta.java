@@ -3,6 +3,8 @@ package br.ufc.pds.entity.carta;
 import br.ufc.pds.controller.ControlBancoImobiliario;
 import br.ufc.pds.entity.jogador.JogadorHumano;
 
+import java.util.Map;
+
 public class CartaAposta extends Carta {
 
 	private float valor;
@@ -15,11 +17,13 @@ public class CartaAposta extends Carta {
 	}
 
 	public void acao(JogadorHumano jogador) {
-//		ControlBancoImobiliario.getInstance().getJogadoresAtivos().forEach((key, value) -> {
-//			System.out.println(value.+" jogando, saldo: "+value.getContaBancaria().getSaldo() + " Num Propriedades: " + value.getPropriedades().size());
-//
-//		});
-		System.out.println("Implementar Ação!!!");
+		Map<Integer, JogadorHumano> listaJogadores = ControlBancoImobiliario.getInstance().getJogadoresAtivos();
+		listaJogadores.forEach((key, value) -> {
+			if (jogador != value) {
+				value.pagar(this.valor);
+				jogador.receber(this.valor);
+				System.out.println(jogador.getNome() + " recebeu R$" + this.valor + " de " + value.getNome());
+			}
+		});
 	}
-
 }

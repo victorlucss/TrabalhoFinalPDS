@@ -14,6 +14,7 @@ public class ControlSorteOuReves {
 
 	private ControlSorteOuReves(){
 		this.cartas = new ArrayList<>();
+		this.criarCartas();
 	}
 
 	public static synchronized ControlSorteOuReves getInstance() {
@@ -21,9 +22,13 @@ public class ControlSorteOuReves {
 	}
 
 	public Carta sortearCarta() {
+		if (cartas.isEmpty()) {
+			this.criarCartas();
+		}
+		System.out.println("Ainda há " + this.cartas.size() + " cartas");
 		Random random = new Random();
 		int i = random.nextInt(this.cartas.size());
-		return this.cartas.get(i);
+		return this.cartas.remove(i);
 	}
 
 	public void criarCartas() {

@@ -13,7 +13,6 @@ public class SorteOuReves extends CampoEspecial implements EfeitoEspecial {
 
 	public SorteOuReves(int indice) {
 		super("Sorte ou Revés", indice);
-		this.controlSorteOuReves.criarCartas();
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {

@@ -49,4 +49,14 @@ public class Teste {
         System.out.println("0- Encerrar Turno");
         return  Integer.parseInt(input.nextLine());
     }
+
+    public static boolean pedidoDeCompra(float valor) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Deseja Vender a Propriedade por R$" + valor + "?\nEscolha:");
+        System.out.println("1- Sim.");
+        System.out.println("0- Não.");
+        if (input.nextInt() == 1)
+            return true;
+        return false;
+    }
 }
