@@ -4,14 +4,21 @@ import br.ufc.pds.entity.jogador.JogadorHumano;
 
 public abstract class Carta {
 
-	private String titulo;
+	protected String titulo;
+	protected String descricao;
+	protected boolean isCoringa;
 
-	private String descricao;
+	public abstract void acao(JogadorHumano jogador);
 
-	private boolean isCoringa;
-
-	public void acao(JogadorHumano jogador) {
-
+	public String getTitulo() {
+		return this.titulo;
 	}
 
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public boolean isCoringa() {
+		return this.isCoringa;
+	}
 }

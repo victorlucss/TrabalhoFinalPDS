@@ -6,18 +6,12 @@ import br.ufc.pds.entity.jogador.Banco;
 import br.ufc.pds.entity.jogador.Jogador;
 import br.ufc.pds.entity.jogador.JogadorHumano;
 
-import java.util.ArrayList;
-
 public class Companhia extends Propriedade implements EfeitoEspecial {
 
 	private float taxa;
 
 	public Companhia(String nome, int indice, float preco, Jogador dono, float taxa) {
-		this.nome = nome;
-		this.indice = indice;
-		this.preco = preco;
-		this.dono = dono;
-		this.listaJogadores = new ArrayList<>();
+		super(nome, indice, preco, dono);
 		this.taxa = taxa;
 	}
 

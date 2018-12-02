@@ -18,7 +18,6 @@ public class Tabuleiro {
     }
 
     public Campo obterCampoInicial() {
-        System.out.println("Esse é o nome: " + campos.get(1).getIndice());
         return campos.get(1);
     }
 

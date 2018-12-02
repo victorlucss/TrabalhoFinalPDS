@@ -10,6 +10,12 @@ public abstract class Campo {
 	protected ArrayList<JogadorHumano> listaJogadores;
 	protected int indice;
 
+	protected Campo(String nome, int indice) {
+		this.nome = nome;
+		this.indice = indice;
+		this.listaJogadores = new ArrayList<>();
+	}
+
 	public int getIndice() {
 		return indice;
 	}

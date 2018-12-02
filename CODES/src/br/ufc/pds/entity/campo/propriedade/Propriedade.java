@@ -8,4 +8,17 @@ public abstract class Propriedade extends Campo {
 	protected float preco;
 	protected Jogador dono;
 
+	protected Propriedade(String nome, int indice, float preco, Jogador jogador) {
+		super(nome, indice);
+		this.preco = preco;
+		this.dono = jogador;
+	}
+
+	public float getPreco() {
+		return this.preco;
+	}
+
+	public Jogador getDono() {
+		return this.dono;
+	}
 }

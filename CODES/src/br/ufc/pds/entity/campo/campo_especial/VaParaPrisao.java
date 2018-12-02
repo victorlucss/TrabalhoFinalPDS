@@ -8,9 +8,7 @@ import java.util.ArrayList;
 public class VaParaPrisao extends CampoEspecial implements EfeitoEspecial {
 
 	public VaParaPrisao(int indice) {
-		this.listaJogadores = new ArrayList<>();
-		this.nome = "Vá Para Prisão";
-		this.indice = indice;
+		super("Vá Para Prisão", indice);
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {

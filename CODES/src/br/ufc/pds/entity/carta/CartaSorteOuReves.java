@@ -1,13 +1,13 @@
 package br.ufc.pds.entity.carta;
 
-import br.ufc.pds.entity.jogador.JogadorHumano;
-
 public abstract class CartaSorteOuReves extends Carta {
 
-	private float valor;
+	protected float valor;
 
-	public void acao(JogadorHumano jogador) {
-
+	protected CartaSorteOuReves (String titulo, String descricao, float valor) {
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.valor = valor;
+		this.isCoringa = false;
 	}
-
 }

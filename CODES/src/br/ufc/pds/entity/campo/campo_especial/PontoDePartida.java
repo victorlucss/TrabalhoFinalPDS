@@ -8,9 +8,7 @@ import java.util.ArrayList;
 public class PontoDePartida extends CampoEspecial implements EfeitoEspecial {
 
 	public PontoDePartida(int indice) {
-		this.listaJogadores = new ArrayList<>();
-		this.nome = "Ponto de Partida";
-		this.indice = indice;
+		super("Ponto de Partida", indice);
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {

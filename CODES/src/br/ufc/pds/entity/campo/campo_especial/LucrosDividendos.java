@@ -8,9 +8,7 @@ import java.util.ArrayList;
 public class LucrosDividendos extends CampoEspecial implements EfeitoEspecial {
 
 	public LucrosDividendos(int indice) {
-		this.listaJogadores = new ArrayList<>();
-		this.nome = "Lucros e Dividendos";
-		this.indice = indice;
+		super("Lucros e Dividendos", indice);
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {

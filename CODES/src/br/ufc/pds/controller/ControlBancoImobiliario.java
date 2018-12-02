@@ -37,8 +37,6 @@ public class ControlBancoImobiliario {
 			this.tabuleiro.obterCampoInicial().addJogador(jogadorHumano);
 		}
 
-		System.out.println(this.jogadoresAtivos.get(1).getPeca().obterLocalizacao().getIndice());
-
 		while(true) {
 			this.iniciarRodada();
 		}
@@ -57,16 +55,21 @@ public class ControlBancoImobiliario {
 
 		jogador.getPeca().obterLocalizacao().removerJogador(jogador); //Remove o jogador do campo em que ele estava
 
-		Campo proximoCampo = this.tabuleiro.obterProximoCampo(jogador.getPeca().obterLocalizacao(), valorDados);
+		//Campo proximoCampo = this.tabuleiro.obterProximoCampo(jogador.getPeca().obterLocalizacao(), valorDados);
+		Campo proximoCampo = this.tabuleiro.obterProximoCampo(this.tabuleiro.obterCampoInicial(), 2);
 		jogador.getPeca().mudarLocalizacao(proximoCampo);
 		Teste.informaAvancoJogador(jogador);//remover-------------------------------------------
 
 		jogador.getPeca().obterLocalizacao().addJogador(jogador); //Adiciona o jogador no Campo Atual
 
-		this.exeutaAcaoCampo((EfeitoEspecial) proximoCampo, jogador); //Aciona o efeito especial para o Jogador...
+		try {
+			this.executaAcaoCampo((EfeitoEspecial) proximoCampo, jogador); //Aciona o efeito especial para o Jogador...
+		} catch (ClassCastException e) {
+			System.out.println("Campo sem Ação!");
+		}
 	}
 
-	public void exeutaAcaoCampo(EfeitoEspecial campo, JogadorHumano jogador) {
+	public void executaAcaoCampo(EfeitoEspecial campo, JogadorHumano jogador) {
 		if (campo!=null) {
 			System.out.println("Testando Aplicar Efeito");
 			campo.aplicarEfeito(jogador);
