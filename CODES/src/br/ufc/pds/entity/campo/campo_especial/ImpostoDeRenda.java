@@ -1,5 +1,6 @@
 package br.ufc.pds.entity.campo.campo_especial;
 
+import br.ufc.pds.entity.campo.EfeitoEspecial;
 import br.ufc.pds.entity.jogador.JogadorHumano;
 
 import java.util.ArrayList;

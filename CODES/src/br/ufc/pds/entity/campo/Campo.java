@@ -10,4 +10,20 @@ public abstract class Campo {
 	protected ArrayList<JogadorHumano> listaJogadores;
 	protected int indice;
 
+	public int getIndice() {
+		return indice;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void addJogador(JogadorHumano jogadorHumano) {
+		this.listaJogadores.add(jogadorHumano);
+	}
+
+	public void removerJogador(JogadorHumano jogadorHumano) {
+		this.listaJogadores.remove(jogadorHumano);
+	}
+
 }

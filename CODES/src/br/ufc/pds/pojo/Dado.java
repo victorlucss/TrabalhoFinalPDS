@@ -1,5 +1,7 @@
 package br.ufc.pds.pojo;
 
+import java.util.Random;
+
 public class Dado {
 
 	private int valorDaFace;
@@ -11,11 +13,12 @@ public class Dado {
 	}
 
 	public void lancar() {
-
+		Random random = new Random();
+		this.valorDaFace = 1 + random.nextInt(this.maxFaces);
 	}
 
 	public int obterValorDaFace() {
-		return 0;
+		return this.valorDaFace;
 	}
 
 }

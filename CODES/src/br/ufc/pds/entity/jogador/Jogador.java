@@ -1,7 +1,7 @@
 package br.ufc.pds.entity.jogador;
 
 import br.ufc.pds.pojo.ContaBancaria;
-import entity.campo.propriedade.Propriedade;
+import br.ufc.pds.entity.campo.propriedade.Propriedade;
 
 import java.util.ArrayList;
 
@@ -10,20 +10,27 @@ public abstract class Jogador {
 	protected ContaBancaria contaBancaria;
 	protected ArrayList<Propriedade> propriedades;
 
-	public void pagar(float valor) {
-
+	public Boolean pagar(float valor) {
+		return this.contaBancaria.pagar(valor);
 	}
 
 	public void receber(float valor) {
-
+		this.contaBancaria.receber(valor);
 	}
 
-	public void comprarPropriedade() {
-
+	public void comprarPropriedade(Propriedade propriedade) {
+		this.propriedades.add(propriedade);
 	}
 
-	public void venderPropriedade() {
-
+	public void venderPropriedade(Propriedade propriedade) {
+		this.propriedades.remove(propriedade);
 	}
 
+	public ContaBancaria getContaBancaria() {
+		return this.contaBancaria;
+	}
+
+	public ArrayList<Propriedade> getPropriedades() {
+		return propriedades;
+	}
 }

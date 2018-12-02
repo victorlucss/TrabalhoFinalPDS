@@ -1,8 +1,12 @@
 package br.ufc.pds.entity.jogador;
 
+import br.ufc.pds.entity.campo.propriedade.Propriedade;
+import br.ufc.pds.pojo.ContaBancaria;
 import br.ufc.pds.pojo.Peca;
 import br.ufc.pds.pojo.Dado;
 import br.ufc.pds.entity.campo.Campo;
+
+import java.util.ArrayList;
 
 public class JogadorHumano extends Jogador {
 
@@ -16,30 +20,34 @@ public class JogadorHumano extends Jogador {
 		this.nome = nome;
 		this.peca = peca;
 		this.dados = dados;
+		this.contaBancaria = new ContaBancaria(1500);
+		this.propriedades = new ArrayList<>();
 	}
 
-	public void pagar(float valor) {
-
+	public int lancarDados() {
+		this.dados[0].lancar();
+		this.dados[1].lancar();
+		System.out.println("Valor do Dado: " + (dados[0].obterValorDaFace() + dados[1].obterValorDaFace()));
+		return dados[0].obterValorDaFace() + dados[1].obterValorDaFace();
 	}
 
-	public void receber(float valor) {
-
+	public String getNome() {
+		return this.nome;
 	}
 
-	public void comprarPropiedade() {
-
+	public Peca getPeca() {
+		return this.peca;
 	}
 
-	public void venderPropriedade() {
-
+	public ContaBancaria getContaBancaria() {
+		return this.contaBancaria;
 	}
 
-	public void lancarDados() {
-
+	public Dado[] getDados() {
+		return this.dados;
 	}
 
-	public Campo obterLocalizacao() {
-		return null;
+	public ArrayList<Propriedade> getPropriedades() {
+		return propriedades;
 	}
-
 }
