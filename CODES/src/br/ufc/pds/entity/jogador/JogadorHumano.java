@@ -1,5 +1,6 @@
 package br.ufc.pds.entity.jogador;
 
+import br.ufc.pds.Teste;
 import br.ufc.pds.entity.campo.propriedade.Propriedade;
 import br.ufc.pds.entity.carta.Carta;
 import br.ufc.pds.pojo.ContaBancaria;
@@ -63,5 +64,10 @@ public class JogadorHumano extends Jogador {
 
 	public int getId() {
 		return this.id;
+	}
+
+	//Pensar mais sobre essa implementação
+	public boolean pedidoDeCompraDePropriedade(Propriedade propriedade, float valor) {
+		return Teste.pedidoDeCompra(valor);
 	}
 }
