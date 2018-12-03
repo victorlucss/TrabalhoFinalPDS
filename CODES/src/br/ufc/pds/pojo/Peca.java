@@ -20,4 +20,7 @@ public class Peca {
 		this.localizacao = campo;
 	}
 
+	public String getCor() {
+		return cor;
+	}
 }

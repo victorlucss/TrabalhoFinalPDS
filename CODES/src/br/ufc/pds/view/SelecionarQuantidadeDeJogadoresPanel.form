@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="br.ufc.pds.view.SelecionarQuantidadeDeJogadoresPanel">
+  <grid id="27dc6" binding="PainelPrincipal" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+    <constraints>
+      <xy x="20" y="20" width="500" height="200"/>
+    </constraints>
+    <properties>
+      <alignmentX value="1.0"/>
+      <alignmentY value="1.0"/>
+      <minimumSize width="500" height="200"/>
+      <opaque value="true"/>
+      <preferredSize width="500" height="200"/>
+    </properties>
+    <clientProperties>
+      <html.disable class="java.lang.Boolean" value="false"/>
+    </clientProperties>
+    <border type="none"/>
+    <children>
+      <component id="427ee" class="javax.swing.JLabel">
+        <constraints/>
+        <properties>
+          <text value="Selecione uma quantidade de jogadores"/>
+        </properties>
+      </component>
+      <component id="92b93" class="javax.swing.JComboBox" binding="quantidadeJogadoresCCbox">
+        <constraints/>
+        <properties>
+          <editable value="false"/>
+          <minimumSize width="200" height="30"/>
+          <model>
+            <item value="2 jogadores"/>
+            <item value="3 jogadores"/>
+            <item value="4 jogadores"/>
+            <item value="5 jogadores"/>
+            <item value="6 jogadores"/>
+          </model>
+          <preferredSize width="200" height="30"/>
+          <selectedIndex value="1"/>
+        </properties>
+      </component>
+      <component id="2600f" class="javax.swing.JButton" binding="button1" default-binding="true">
+        <constraints/>
+        <properties>
+          <preferredSize width="450" height="30"/>
+          <text value="Confirmar"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
