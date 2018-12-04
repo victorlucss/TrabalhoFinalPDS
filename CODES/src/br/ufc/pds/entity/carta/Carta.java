@@ -1,6 +1,7 @@
 package br.ufc.pds.entity.carta;
 
 import br.ufc.pds.entity.jogador.JogadorHumano;
+import br.ufc.pds.view.MensagemSorteReves;
 
 public abstract class Carta {
 
@@ -20,5 +21,10 @@ public abstract class Carta {
 
 	public boolean isCoringa() {
 		return this.isCoringa;
+	}
+
+	public void showCarta(String titulo, String mensagem, String acao) {
+		MensagemSorteReves ms = new MensagemSorteReves(titulo, mensagem, acao);
+		ms.setVisible(true);
 	}
 }

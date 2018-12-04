@@ -8,8 +8,8 @@ public abstract class Propriedade extends Campo {
 	protected float preco;
 	protected Jogador dono;
 
-	protected Propriedade(String nome, int indice, float preco, Jogador jogador) {
-		super(nome, indice);
+	protected Propriedade(String nome, int indice, float preco, Jogador jogador, int eixoX, int eixoY) {
+		super(nome, indice, eixoX, eixoY);
 		this.preco = preco;
 		this.dono = jogador;
 	}

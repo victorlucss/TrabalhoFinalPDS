@@ -11,7 +11,8 @@ public class Sorte extends CartaSorteOuReves {
 	public void acao(JogadorHumano jogador) {
 		Banco.getInstance().pagar(this.valor);
 		jogador.receber(this.valor);
-		System.out.println(jogador.getNome() + " recebeu R$ " + this.valor);
+		//System.out.println(jogador.getNome() + " recebeu R$ " + this.valor);
+		this.showCarta(this.titulo, this.descricao, jogador.getNome() + " recebeu R$ " + this.valor);
 	}
 
 }

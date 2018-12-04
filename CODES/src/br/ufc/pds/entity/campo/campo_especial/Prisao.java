@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Prisao extends CampoEspecial implements EfeitoEspecial {
 
 	public Prisao(int indice) {
-		super("Prisão", indice);
+		super("Prisão", indice, 21, 638);
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {

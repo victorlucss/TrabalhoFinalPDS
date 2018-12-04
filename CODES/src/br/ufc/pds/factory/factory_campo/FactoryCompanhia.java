@@ -14,7 +14,7 @@ public class FactoryCompanhia {
         return factoryCompanhia;
     }
 
-    public Campo criar(String nome, int indice, float preco, Jogador dono, float taxa) {
-        return new Companhia(nome, indice, preco, dono, taxa);
+    public Campo criar(String nome, int indice, float preco, Jogador dono, float taxa, int eixoX, int eixoY) {
+        return new Companhia(nome, indice, preco, dono, taxa, eixoX, eixoY);
     }
 }

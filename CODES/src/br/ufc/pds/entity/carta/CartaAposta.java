@@ -25,5 +25,6 @@ public class CartaAposta extends Carta {
 				System.out.println(jogador.getNome() + " recebeu R$" + this.valor + " de " + value.getNome());
 			}
 		});
+		this.showCarta(this.titulo, this.descricao, jogador.getNome() + " Recebeu R$ 50 de cada Jogador.");
 	}
 }

@@ -12,7 +12,7 @@ public class FactoryCampoEspecial {
         return factoryCampoEspecial;
     }
 
-    public Campo criar(String tipoCampo, int indice) {
+    public Campo criar(String tipoCampo, int indice, int eixoX, int eixoY) {
         if (tipoCampo.equals("PontoDePartida")) {
             return new PontoDePartida(indice);
         } else if (tipoCampo.equals("ImpostoDeRenda")) {
@@ -26,7 +26,7 @@ public class FactoryCampoEspecial {
         } else if (tipoCampo.equals("Prisao")) {
             return new Prisao(indice);
         } else if (tipoCampo.equals("SorteOuReves")) {
-            return new SorteOuReves(indice);
+            return new SorteOuReves(indice, eixoX, eixoY);
         }
         return null;
     }

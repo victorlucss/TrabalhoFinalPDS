@@ -11,13 +11,13 @@ public class SorteOuReves extends CampoEspecial implements EfeitoEspecial {
 
 	private ControlSorteOuReves controlSorteOuReves = ControlSorteOuReves.getInstance();
 
-	public SorteOuReves(int indice) {
-		super("Sorte ou Revés", indice);
+	public SorteOuReves(int indice, int eixoX, int eixoY) {
+		super("Sorte ou Revés", indice, eixoX, eixoY);
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {
 		Carta sorteda = this.controlSorteOuReves.sortearCarta();
-		System.out.println("Carta " + sorteda.getTitulo() + "\nDescricao: " + sorteda.getDescricao());
+//		System.out.println("Carta " + sorteda.getTitulo() + "\nDescricao: " + sorteda.getDescricao());
 		sorteda.acao(jogador);
 	}
 

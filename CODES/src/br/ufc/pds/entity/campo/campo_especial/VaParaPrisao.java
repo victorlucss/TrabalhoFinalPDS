@@ -9,12 +9,15 @@ import java.util.ArrayList;
 public class VaParaPrisao extends CampoEspecial implements EfeitoEspecial {
 
 	public VaParaPrisao(int indice) {
-		super("Vá Para Prisão", indice);
+		super("Vá Para Prisão", indice, 640, 15);
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {
 		ControlBancoImobiliario.getInstance().prenderJogador(jogador);
-		System.out.println(jogador.getNome()+" foi Preso!");
+		String titulo = this.nome;
+		String acao = jogador.getNome()+" foi Preso!";
+
+		this.showMensagem(titulo, acao);
 	}
 
 }

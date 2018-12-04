@@ -4,6 +4,7 @@ import br.ufc.pds.Teste;
 import br.ufc.pds.entity.campo.propriedade.Propriedade;
 import br.ufc.pds.entity.carta.Carta;
 import br.ufc.pds.pojo.ContaBancaria;
+import br.ufc.pds.pojo.FichaCriminal;
 import br.ufc.pds.pojo.Peca;
 import br.ufc.pds.pojo.Dado;
 
@@ -16,6 +17,7 @@ public class JogadorHumano extends Jogador {
 	private Peca peca;
 	private Carta cartaPrisao;
 	private Dado[] dados;
+	private FichaCriminal fichaCriminal;
 
 	public JogadorHumano(int id, String nome, Peca peca, Dado[] dados) {
 		this.id = id;
@@ -25,6 +27,7 @@ public class JogadorHumano extends Jogador {
 		this.cartaPrisao = null;
 		this.contaBancaria = new ContaBancaria(1500);
 		this.propriedades = new ArrayList<>();
+		this.fichaCriminal = new FichaCriminal();
 	}
 
 	public int lancarDados() {
@@ -69,5 +72,9 @@ public class JogadorHumano extends Jogador {
 	//Pensar mais sobre essa implementação
 	public boolean pedidoDeCompraDePropriedade(Propriedade propriedade, float valor) {
 		return Teste.pedidoDeCompra(valor);
+	}
+
+	public FichaCriminal getFichaCriminal() {
+		return fichaCriminal;
 	}
 }

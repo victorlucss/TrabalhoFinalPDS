@@ -9,11 +9,15 @@ public abstract class Campo {
 	protected String nome;
 	protected ArrayList<JogadorHumano> listaJogadores;
 	protected int indice;
+	protected int eixoX;
+	protected int eixoY;
 
-	protected Campo(String nome, int indice) {
+	protected Campo(String nome, int indice, int eixoX, int eixoY) {
 		this.nome = nome;
 		this.indice = indice;
 		this.listaJogadores = new ArrayList<>();
+		this.eixoX = eixoX;
+		this.eixoY = eixoY;
 	}
 
 	public int getIndice() {
@@ -33,4 +37,11 @@ public abstract class Campo {
 		this.listaJogadores.remove(jogadorHumano);
 	}
 
+	public int getEixoX() {
+		return this.eixoX;
+	}
+
+	public int getEixoY() {
+		return this.eixoY;
+	}
 }
