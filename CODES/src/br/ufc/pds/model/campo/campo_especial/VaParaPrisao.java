@@ -6,8 +6,8 @@ import br.ufc.pds.model.jogador.JogadorHumano;
 
 public class VaParaPrisao extends CampoEspecial implements EfeitoEspecial {
 
-	public VaParaPrisao(int indice) {
-		super("Vá Para Prisão", indice, 640, 45);
+	public VaParaPrisao(int indice, int eixoX, int eixoY) {
+		super("Vá Para Prisão", indice, eixoX, eixoY);
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {

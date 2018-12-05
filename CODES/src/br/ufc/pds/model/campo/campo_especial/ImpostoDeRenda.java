@@ -6,8 +6,8 @@ import br.ufc.pds.model.jogador.JogadorHumano;
 
 public class ImpostoDeRenda extends CampoEspecial implements EfeitoEspecial {
 
-    public ImpostoDeRenda(int indice) {
-        super("Imposto de Renda", indice, 280, 15);
+    public ImpostoDeRenda(int indice, int eixoX, int eixoY) {
+        super("Imposto de Renda", indice, eixoX, eixoY);
     }
 
     public void aplicarEfeito(JogadorHumano jogador) {

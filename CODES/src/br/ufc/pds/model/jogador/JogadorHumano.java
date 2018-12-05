@@ -28,7 +28,7 @@ public class JogadorHumano extends Jogador implements SubjectObserver {
 		this.peca = peca;
 		this.dados = dados;
 		this.cartaPrisao = null;
-		this.contaBancaria = new ContaBancaria(300);
+		this.contaBancaria = new ContaBancaria(1500);
 		this.propriedades = new ArrayList<>();
 		this.fichaCriminal = new FichaCriminal();
 		this.observerCollection = new ArrayList<>();

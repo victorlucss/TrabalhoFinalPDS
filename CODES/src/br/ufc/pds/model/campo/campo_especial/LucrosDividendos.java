@@ -6,8 +6,8 @@ import br.ufc.pds.model.jogador.JogadorHumano;
 
 public class LucrosDividendos extends CampoEspecial implements EfeitoEspecial {
 
-	public LucrosDividendos(int indice) {
-		super("Lucros e Dividendos", indice, 23, 161);
+	public LucrosDividendos(int indice, int eixoX, int eixoY) {
+		super("Lucros e Dividendos", indice, eixoX, eixoY);
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {

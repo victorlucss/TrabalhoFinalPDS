@@ -15,14 +15,6 @@ public abstract class Carta {
 		return this.titulo;
 	}
 
-	public String getDescricao() {
-		return this.descricao;
-	}
-
-	public boolean isCoringa() {
-		return this.isCoringa;
-	}
-
 	public void showCarta(String titulo, String mensagem, String acao) {
 		MensagemSorteReves ms = new MensagemSorteReves(titulo, mensagem, acao);
 		ms.setVisible(true);

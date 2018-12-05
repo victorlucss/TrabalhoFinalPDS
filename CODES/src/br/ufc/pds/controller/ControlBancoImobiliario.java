@@ -265,14 +265,6 @@ public class ControlBancoImobiliario implements ObserverJogador {
 		return camposIndisponiveis.isEmpty();
 	}
 
-	public Tabuleiro getTabuleiro() {
-		return this.tabuleiro;
-	}
-
-	public void changeHasSetedNumJogadores(){
-		this.hasSetedNumJogadores = true;
-	}
-
 	@Override
 	public void update(JogadorHumano jogador, float valor) {
 	    System.out.println(jogador.getNome()+" está devendo R$ "+valor);

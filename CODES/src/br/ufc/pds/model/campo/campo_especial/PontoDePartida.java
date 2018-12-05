@@ -6,8 +6,8 @@ import br.ufc.pds.model.jogador.JogadorHumano;
 
 public class PontoDePartida extends CampoEspecial implements EfeitoEspecial {
 
-	public PontoDePartida(int indice) {
-		super("Ponto de Partida", indice, 639, 632);
+	public PontoDePartida(int indice, int eixoX, int eixoY) {
+		super("Ponto de Partida", indice, eixoX, eixoY);
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {
