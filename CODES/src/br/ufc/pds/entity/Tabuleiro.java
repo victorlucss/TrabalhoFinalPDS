@@ -37,4 +37,8 @@ public class Tabuleiro {
         return this.campos.get(indice);
     }
 
+    public Map<Integer, Campo> getCampos() {
+        return this.campos;
+    }
+
 }

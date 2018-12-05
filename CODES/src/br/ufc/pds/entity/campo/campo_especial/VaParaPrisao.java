@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class VaParaPrisao extends CampoEspecial implements EfeitoEspecial {
 
 	public VaParaPrisao(int indice) {
-		super("Vá Para Prisão", indice, 640, 15);
+		super("Vá Para Prisão", indice, 640, 45);
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {

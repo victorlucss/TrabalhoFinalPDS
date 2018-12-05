@@ -24,7 +24,7 @@ public class ControlCampos {
         campos.put(2, new Terreno("LEBLON", 2, dono, 100, "ROSA", 6, 50, 50, 30, 90, 270, 400, 500, 581, 631));
         campos.put(3, FactoryCampoEspecial.getInstance().criar("SorteOuReves", 3, 519, 631));
         campos.put(4, new Terreno("AV. PRESIDENTE VARGAS", 4, dono, 60, "ROSA", 2, 50, 50, 10, 30, 90, 160, 250, 458, 631));
-        campos.put(5, new Terreno("AV. NOSSA SENHORA DE COPACABANA", 5, dono, 60, "ROSA", 4, 50, 50, 20, 60, 180, 320, 450, 298, 631));
+        campos.put(5, new Terreno("AV. NOSSA SENHORA DE COPACABANA", 5, dono, 60, "ROSA", 4, 50, 50, 20, 60, 180, 320, 450, 398, 631));
         campos.put(6, FactoryCompanhia.getInstance().criar("COMPANHIA FERROVIÁRIA", 6, 200, dono, 50, 339, 631  ));
         campos.put(7, new Terreno("AV. BRIGADEIRO FARIA LIMA", 7, dono, 240, "AZUL", 20, 150, 150, 100, 300, 750, 925, 1100, 284, 631));
         campos.put(8, FactoryCompanhia.getInstance().criar("COMPANHIA DE VIAÇÃO", 8, 200, dono, 50, 337, 631));
@@ -50,10 +50,10 @@ public class ControlCampos {
         campos.put(28, FactoryCampoEspecial.getInstance().criar("SorteOuReves", 28, 454, 15));
         campos.put(29, new Terreno("AV. PAULISTA", 29, dono, 140, "AMARELO", 10, 100, 100, 50, 150, 450, 625, 750, 511, 15));
         campos.put(30, new Terreno("JARDIM EUROPA", 30, dono, 140, "AMARELO", 10, 100, 100, 50, 150, 450, 625, 750, 567, 15));
-        campos.put(31, FactoryCampoEspecial.getInstance().criar("VaParaPrisao", 31, 640, 15));
+        campos.put(31, FactoryCampoEspecial.getInstance().criar("VaParaPrisao", 31, 640, 45));
         campos.put(32, new Terreno("COPACABANA", 32, dono, 260, "VERDE", 22, 150, 150, 110, 330, 800, 975, 1150, 631, 99));
         campos.put(33, FactoryCompanhia.getInstance().criar("COMPANHIA DE AVIAÇÃO", 33, 200, dono, 50, 631, 160));
-        campos.put(34, new Terreno("AV. VIEIRA SOUTO", 34, dono, 320, "VERDE", 28, 200, 200, 150, 450, 1000, 1200, 1400, 631, 22));
+        campos.put(34, new Terreno("AV. VIEIRA SOUTO", 34, dono, 320, "VERDE", 28, 200, 200, 150, 450, 1000, 1200, 1400, 631, 228));
         campos.put(35, new Terreno("AV. ATLÂNTICA", 35, dono, 300, "VERDE", 26, 200, 200, 130, 390, 900, 1100, 1275, 631, 279));
         campos.put(36, FactoryCompanhia.getInstance().criar("COMPANHIA DE TAXI AÉRIO", 36, 200, dono, 50, 631, 339));
         campos.put(37, new Terreno("IPANEMA", 37, dono, 300, "VERDE", 26, 200, 200, 130, 390, 900, 1100, 1275, 631, 392));

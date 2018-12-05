@@ -2,11 +2,12 @@ package br.ufc.pds.controller;
 
 import br.ufc.pds.entity.carta.Carta;
 import br.ufc.pds.factory.FactoryCartas;
+import br.ufc.pds.interfaces.Iterator;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ControlSorteOuReves {
+public class ControlSorteOuReves implements Iterator {
 
 	private ArrayList<Carta> cartas;
 
@@ -62,4 +63,18 @@ public class ControlSorteOuReves {
 		this.cartas.add(FactoryCartas.getInstance().criar("Sorte", "Você tirou o primeiro lugar no Torneio de Tẽnis do seu clube. Parabéns.", "Sorte", 100));
 	}
 
+	@Override
+	public Object first() {
+		return this.cartas.get(0);
+	}
+
+	@Override
+	public Object next() {
+		return null;
+	}
+
+	@Override
+	public boolean isDone() {
+		return false;
+	}
 }

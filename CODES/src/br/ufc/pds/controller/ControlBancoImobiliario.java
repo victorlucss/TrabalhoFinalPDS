@@ -4,7 +4,10 @@ import br.ufc.pds.Teste;
 import br.ufc.pds.entity.Tabuleiro;
 import br.ufc.pds.entity.campo.Campo;
 import br.ufc.pds.entity.campo.EfeitoEspecial;
+import br.ufc.pds.entity.campo.propriedade.Propriedade;
+import br.ufc.pds.entity.campo.propriedade.Terreno;
 import br.ufc.pds.entity.jogador.Banco;
+import br.ufc.pds.entity.jogador.Jogador;
 import br.ufc.pds.entity.jogador.JogadorHumano;
 import br.ufc.pds.pojo.Dado;
 import br.ufc.pds.pojo.Peca;
@@ -68,9 +71,17 @@ public class ControlBancoImobiliario {
 	public void renderizarTelaPrincipal() {
         this.telaPrincipal.drawBackgroud();
 
-        this.jogadoresAtivos.forEach((key, value) -> {
-            this.telaPrincipal.renderPeca(value.getPeca());
-        });
+        this.tabuleiro.getCampos().forEach((key, value) -> {
+        	if (value instanceof Terreno && ((Terreno) value).getDono() != Banco.getInstance())
+        		this.telaPrincipal.renderCasasHoteis((Terreno) value);
+
+        	if (value instanceof Propriedade && ((Propriedade) value).getDono() != Banco.getInstance())
+				this.telaPrincipal.renderProprietario((Propriedade)value);
+		});
+
+		this.jogadoresAtivos.forEach((key, value) -> {
+			this.telaPrincipal.renderPeca(value.getPeca());
+		});
 
         this.telaPrincipal.displayJanelaPrincipal();
     }
@@ -111,14 +122,16 @@ public class ControlBancoImobiliario {
             JOptionPane.showMessageDialog(null, jogador.getNome() + " saiu da Prisão (Carta Coringa)");
         } else if (this.dados[0].obterValorDaFace() == this.dados[1].obterValorDaFace()) {
             this.soltarJogador(jogador);
-            this.soltarJogador(jogador);
             jogador.getFichaCriminal().setRodadasPreso(0);
             this.alterarPosicaoDoJogador(jogador);
             JOptionPane.showMessageDialog(null, jogador.getNome() + " saiu da Prisão (Dados Iguais)");
 
         } else if (jogador.getFichaCriminal().getRodadasPreso() >= 3) {
-            jogador.getContaBancaria().pagar(50);
+            jogador.getContaBancaria().pagar(50); //IMPLEMENTAR QUANDO O JOGADOR NÃO TIVER MAIS CONDIÇÕES PARA PAGAR
             Banco.getInstance().receber(50);
+			this.soltarJogador(jogador);
+			jogador.getFichaCriminal().setRodadasPreso(0);
+			this.alterarPosicaoDoJogador(jogador);
             JOptionPane.showMessageDialog(null, jogador.getNome() + " saiu da Prisão (Pagou R$ 50,00 ao Banco)");
         } else {
             int delitos = jogador.getFichaCriminal().getRodadasPreso() + 1;
@@ -131,7 +144,7 @@ public class ControlBancoImobiliario {
 
 	public void jogadorRealizaTurno(JogadorHumano jogador) {
         Campo proximoCampo = this.alterarPosicaoDoJogador(jogador);
-        
+
 		try {
 			this.executaAcaoCampo((EfeitoEspecial) proximoCampo, jogador); //Aciona o efeito especial para o Jogador...
 		} catch (ClassCastException e) {
@@ -169,7 +182,7 @@ public class ControlBancoImobiliario {
 
 	public void soltarJogador(JogadorHumano jogador) {
 		this.tabuleiro.buscarCampo(11).removerJogador(jogador); // 11 é o índice da prisão
-		this.jogadoresPresos.remove(jogador);
+		this.jogadoresPresos.remove(jogador.getId());
 	}
 
     public ArrayList<String> getCores(){
@@ -216,6 +229,30 @@ public class ControlBancoImobiliario {
 	public void setNumJogadores(int numJogadores) {
 		System.out.println(numJogadores);
 		this.numJogadores = numJogadores;
+	}
+
+	public boolean validarConstrucaoCasa(JogadorHumano jogador, Terreno terreno){
+		ArrayList<Campo> camposIndisponiveis = new ArrayList<>();
+
+		this.tabuleiro.getCampos().forEach((key, campo) -> {
+			System.out.println("Verificar aki"); //remover---------------------------------------------------------
+			if (campo instanceof Terreno && campo!=terreno) {
+				System.out.println("1"); //remover---------------------------------------------------------
+				if (((Terreno) campo).getCor().equals(terreno.getCor())) {
+					System.out.println("2"); //remover---------------------------------------------------------
+					if(jogador != terreno.getDono() || terreno.getNumCasas() > ((Terreno) campo).getNumCasas()) {
+						System.out.println("3"); //remover---------------------------------------------------------
+						camposIndisponiveis.add(campo);
+					}
+				}
+			}
+		});
+
+		return !camposIndisponiveis.isEmpty();
+	}
+
+	public Tabuleiro getTabuleiro() {
+		return this.tabuleiro;
 	}
 
 	public void changeHasSetedNumJogadores(){
