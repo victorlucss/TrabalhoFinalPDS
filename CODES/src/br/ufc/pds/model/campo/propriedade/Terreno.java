@@ -128,14 +128,10 @@ public class Terreno extends Propriedade implements EfeitoEspecial {
                 JOptionPane.showMessageDialog(null,jogador.getNome() + " desistiu da compra.");
             }
         } else {
-            //IMPLEMENTAR AÇÕES PARA QUANDO O USUÁRIO NÃO TIVER MAIS DINHEIRO--------------------------------------------------------------------------------------
-
             if (jogador.pagarCredor(this.getAluguel())) {
                 JOptionPane.showMessageDialog(null,jogador.getNome()+" encerrou o Turno e pagou R$ " + this.getAluguel() + " de aluguel");
                 this.dono.receber(this.getAluguel());
             }
-            //jogador.pagar(this.getAluguel());
-
         }
     }
 
