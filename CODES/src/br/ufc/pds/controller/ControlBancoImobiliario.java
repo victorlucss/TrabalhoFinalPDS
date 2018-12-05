@@ -20,7 +20,12 @@ import javax.swing.*;
 import java.util.*;
 
 public class ControlBancoImobiliario implements ObserverJogador {
-	private static ControlBancoImobiliario controlBancoImobiliario = new ControlBancoImobiliario();
+	private static ControlBancoImobiliario controlBancoImobiliario = null;
+
+	public static synchronized ControlBancoImobiliario getInstance(){
+		if(controlBancoImobiliario == null) controlBancoImobiliario = new ControlBancoImobiliario();
+		return controlBancoImobiliario;
+	}
 
 	private Map<Integer, JogadorHumano> jogadoresAtivos;
 	private Map<Integer,JogadorHumano> jogadoresPresos;
@@ -38,10 +43,6 @@ public class ControlBancoImobiliario implements ObserverJogador {
 		this.jogadoresPresos = new HashMap<>();
 		this.banco = Banco.getInstance();
 		this.tabuleiro = new Tabuleiro();
-	}
-
-	public static synchronized ControlBancoImobiliario getInstance(){
-		return controlBancoImobiliario;
 	}
 
 	public void jogar() {

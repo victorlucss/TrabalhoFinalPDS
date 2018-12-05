@@ -11,17 +11,17 @@ public class ControlSorteOuReves implements Iterator {
 
 	private ArrayList<Carta> cartas;
 
-	private static ControlSorteOuReves controlSorteOuReves = new ControlSorteOuReves();
+	private static ControlSorteOuReves controlSorteOuReves = null;
+
+	public static synchronized ControlSorteOuReves getInstance() {
+		if(controlSorteOuReves == null) controlSorteOuReves =  new ControlSorteOuReves();
+		return controlSorteOuReves;
+	}
 
 	private ControlSorteOuReves(){
 		this.cartas = new ArrayList<>();
 		this.criarCartas();
 	}
-
-	public static synchronized ControlSorteOuReves getInstance() {
-		return controlSorteOuReves;
-	}
-
 	private void criarCartas() {
 		this.cartas.add(FactoryCartas.getInstance().criar("Sorte", "A prefetura mandou abrir uma nova avenida, para o que desapropriou vários prédios. Em consequencia seu terreno valorizou", "Sorte", 25));
 		this.cartas.add(FactoryCartas.getInstance().criar("Reves", "Papai os livros do ano passado não servem mais, preciso de livros novos", "Reves", 40));

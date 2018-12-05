@@ -6,11 +6,12 @@ import br.ufc.pds.model.jogador.Jogador;
 
 public class FactoryCompanhia {
 
-    private static FactoryCompanhia factoryCompanhia = new FactoryCompanhia();
+    private static FactoryCompanhia factoryCompanhia = null;
 
     private FactoryCompanhia() {}
 
     public static synchronized FactoryCompanhia getInstance() {
+        if(factoryCompanhia == null) factoryCompanhia = new FactoryCompanhia();
         return factoryCompanhia;
     }
 
