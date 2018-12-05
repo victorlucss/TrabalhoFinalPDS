@@ -1,8 +1,8 @@
 package br.ufc.pds.factory.factory_campo;
 
-import br.ufc.pds.entity.campo.Campo;
-import br.ufc.pds.entity.campo.propriedade.Companhia;
-import br.ufc.pds.entity.jogador.Jogador;
+import br.ufc.pds.model.campo.Campo;
+import br.ufc.pds.model.campo.propriedade.Companhia;
+import br.ufc.pds.model.jogador.Jogador;
 
 public class FactoryCompanhia {
 

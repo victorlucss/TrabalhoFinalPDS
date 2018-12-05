@@ -1,8 +1,7 @@
-package br.ufc.pds.entity;
+package br.ufc.pds.model;
 
 import br.ufc.pds.controller.ControlCampos;
-import br.ufc.pds.entity.campo.Campo;
-import br.ufc.pds.entity.jogador.Banco;
+import br.ufc.pds.model.campo.Campo;
 
 import java.util.HashMap;
 import java.util.Map;

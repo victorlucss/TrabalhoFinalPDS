@@ -1,6 +1,6 @@
-package br.ufc.pds.entity.campo.campo_especial;
+package br.ufc.pds.model.campo.campo_especial;
 
-import br.ufc.pds.entity.campo.Campo;
+import br.ufc.pds.model.campo.Campo;
 import br.ufc.pds.view.MensagemCamposDeAcao;
 
 

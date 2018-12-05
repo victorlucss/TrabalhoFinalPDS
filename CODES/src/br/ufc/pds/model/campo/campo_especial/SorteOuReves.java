@@ -1,11 +1,9 @@
-package br.ufc.pds.entity.campo.campo_especial;
+package br.ufc.pds.model.campo.campo_especial;
 
 import br.ufc.pds.controller.ControlSorteOuReves;
-import br.ufc.pds.entity.campo.EfeitoEspecial;
-import br.ufc.pds.entity.carta.Carta;
-import br.ufc.pds.entity.jogador.JogadorHumano;
-
-import java.util.ArrayList;
+import br.ufc.pds.model.campo.EfeitoEspecial;
+import br.ufc.pds.model.carta.Carta;
+import br.ufc.pds.model.jogador.JogadorHumano;
 
 public class SorteOuReves extends CampoEspecial implements EfeitoEspecial {
 

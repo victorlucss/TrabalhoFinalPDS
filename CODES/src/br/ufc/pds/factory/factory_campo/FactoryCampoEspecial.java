@@ -1,7 +1,7 @@
 package br.ufc.pds.factory.factory_campo;
 
-import br.ufc.pds.entity.campo.Campo;
-import br.ufc.pds.entity.campo.campo_especial.*;
+import br.ufc.pds.model.campo.Campo;
+import br.ufc.pds.model.campo.campo_especial.*;
 
 public class FactoryCampoEspecial {
     private static FactoryCampoEspecial factoryCampoEspecial = new FactoryCampoEspecial();

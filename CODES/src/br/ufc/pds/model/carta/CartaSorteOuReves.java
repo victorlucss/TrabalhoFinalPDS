@@ -1,4 +1,4 @@
-package br.ufc.pds.entity.carta;
+package br.ufc.pds.model.carta;
 
 public abstract class CartaSorteOuReves extends Carta {
 

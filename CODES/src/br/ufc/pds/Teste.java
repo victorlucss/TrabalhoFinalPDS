@@ -1,10 +1,7 @@
 package br.ufc.pds;
 
-import br.ufc.pds.entity.jogador.JogadorHumano;
-import br.ufc.pds.pojo.Peca;
+import br.ufc.pds.model.jogador.JogadorHumano;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Teste {

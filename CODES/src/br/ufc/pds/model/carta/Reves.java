@@ -1,7 +1,7 @@
-package br.ufc.pds.entity.carta;
+package br.ufc.pds.model.carta;
 
-import br.ufc.pds.entity.jogador.Banco;
-import br.ufc.pds.entity.jogador.JogadorHumano;
+import br.ufc.pds.model.jogador.Banco;
+import br.ufc.pds.model.jogador.JogadorHumano;
 
 public class Reves extends CartaSorteOuReves {
     public Reves(String titulo, String descricao, float valor) {
@@ -9,8 +9,10 @@ public class Reves extends CartaSorteOuReves {
     }
 
     public void acao(JogadorHumano jogador) {
-        Banco.getInstance().receber(this.valor);
-        jogador.pagar(this.valor);
+//        jogador.pagar(this.valor);
+        if (jogador.pagarCredor(this.valor)){
+            Banco.getInstance().receber(this.valor);
+        }
         //System.out.println(jogador.getNome() + " pagou R$ " + this.valor);
         this.showCarta(this.titulo, this.descricao, jogador.getNome() + " pagou R$ " + this.valor);
     }

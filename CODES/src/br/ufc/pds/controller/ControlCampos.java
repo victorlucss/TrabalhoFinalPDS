@@ -1,9 +1,9 @@
 package br.ufc.pds.controller;
 
-import br.ufc.pds.entity.campo.Campo;
-import br.ufc.pds.entity.campo.propriedade.Terreno;
-import br.ufc.pds.entity.jogador.Banco;
-import br.ufc.pds.entity.jogador.Jogador;
+import br.ufc.pds.model.campo.Campo;
+import br.ufc.pds.model.campo.propriedade.Terreno;
+import br.ufc.pds.model.jogador.Banco;
+import br.ufc.pds.model.jogador.Jogador;
 import br.ufc.pds.factory.factory_campo.FactoryCampoEspecial;
 import br.ufc.pds.factory.factory_campo.FactoryCompanhia;
 

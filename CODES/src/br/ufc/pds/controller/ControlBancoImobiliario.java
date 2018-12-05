@@ -1,14 +1,14 @@
 package br.ufc.pds.controller;
 
 import br.ufc.pds.Teste;
-import br.ufc.pds.entity.Tabuleiro;
-import br.ufc.pds.entity.campo.Campo;
-import br.ufc.pds.entity.campo.EfeitoEspecial;
-import br.ufc.pds.entity.campo.propriedade.Propriedade;
-import br.ufc.pds.entity.campo.propriedade.Terreno;
-import br.ufc.pds.entity.jogador.Banco;
-import br.ufc.pds.entity.jogador.Jogador;
-import br.ufc.pds.entity.jogador.JogadorHumano;
+import br.ufc.pds.interfaces.ObserverJogador;
+import br.ufc.pds.model.Tabuleiro;
+import br.ufc.pds.model.campo.Campo;
+import br.ufc.pds.model.campo.EfeitoEspecial;
+import br.ufc.pds.model.campo.propriedade.Propriedade;
+import br.ufc.pds.model.campo.propriedade.Terreno;
+import br.ufc.pds.model.jogador.Banco;
+import br.ufc.pds.model.jogador.JogadorHumano;
 import br.ufc.pds.pojo.Dado;
 import br.ufc.pds.pojo.Peca;
 import br.ufc.pds.view.EntraComJogador;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ControlBancoImobiliario {
+public class ControlBancoImobiliario implements ObserverJogador {
 	private static ControlBancoImobiliario controlBancoImobiliario = new ControlBancoImobiliario();
 
 	private Map<Integer, JogadorHumano> jogadoresAtivos;
@@ -90,8 +90,9 @@ public class ControlBancoImobiliario {
 		System.out.println(jogador+" "+cor);
 		int indice = jogadoresAtivos.size();
 		JogadorHumano jogadorHumano = new JogadorHumano(indice, jogador, new Peca(cor, this.tabuleiro.obterCampoInicial()), this.dados);
-					this.jogadoresAtivos.put(indice, jogadorHumano);
-			this.tabuleiro.obterCampoInicial().addJogador(jogadorHumano);
+		this.jogadoresAtivos.put(indice, jogadorHumano);
+		this.tabuleiro.obterCampoInicial().addJogador(jogadorHumano);
+		jogadorHumano.addObserver(this);
 	}
 
 	public void iniciarRodada() {
@@ -142,23 +143,29 @@ public class ControlBancoImobiliario {
 	}
 
 
-	public void jogadorRealizaTurno(JogadorHumano jogador) {
-        Campo proximoCampo = this.alterarPosicaoDoJogador(jogador);
+	private void jogadorRealizaTurno(JogadorHumano jogador) {
+		if (jogador.getFichaCriminal().getNumDelitos()>=3){
+			JOptionPane.showMessageDialog(null, jogador.getNome() + " preso por trapacear.");
+			this.prenderJogador(jogador);
+			jogador.getFichaCriminal().setNumDelitos(0);
+		} else {
+			Campo proximoCampo = this.alterarPosicaoDoJogador(jogador);
 
-		try {
-			this.executaAcaoCampo((EfeitoEspecial) proximoCampo, jogador); //Aciona o efeito especial para o Jogador...
-		} catch (ClassCastException e) {
-			System.out.println("Campo sem Ação!"); // Caso caia em Paradav Livre
+			try {
+				this.executaAcaoCampo((EfeitoEspecial) proximoCampo, jogador); //Aciona o efeito especial para o Jogador...
+			} catch (ClassCastException e) {
+				System.out.println("Campo sem Ação!"); // Caso caia em Paradav Livre
+			}
 		}
 	}
 
-	public Campo alterarPosicaoDoJogador(JogadorHumano jogador) {
-        int valorDados = jogador.getDados()[0].obterValorDaFace() + jogador.getDados()[1].obterValorDaFace();
+	private Campo alterarPosicaoDoJogador(JogadorHumano jogador) {
+		int valorDados = jogador.getDados()[0].obterValorDaFace() + jogador.getDados()[1].obterValorDaFace();
 
         jogador.getPeca().obterLocalizacao().removerJogador(jogador); //Remove o jogador do campo em que ele estava
 
         Campo proximoCampo = this.tabuleiro.obterProximoCampo(jogador.getPeca().obterLocalizacao(), valorDados);
-        //Campo proximoCampo = this.tabuleiro.obterProximoCampo(this.tabuleiro.obterCampoInicial(), 30); // NÃO REMOVERLinha usada apenas para testes
+//        Campo proximoCampo = this.tabuleiro.obterProximoCampo(this.tabuleiro.obterCampoInicial(), 5); // NÃO REMOVERLinha usada apenas para testes
         jogador.getPeca().mudarLocalizacao(proximoCampo);
         Teste.informaAvancoJogador(jogador);//remover-------------------------------------------
 
@@ -168,10 +175,21 @@ public class ControlBancoImobiliario {
         return proximoCampo;
     }
 
-	public void executaAcaoCampo(EfeitoEspecial campo, JogadorHumano jogador) {
+	private void executaAcaoCampo(EfeitoEspecial campo, JogadorHumano jogador) {
 		if (campo!=null) {
-			System.out.println("Testando Aplicar Efeito");
+			//System.out.println("Testando Aplicar Efeito");
 			campo.aplicarEfeito(jogador);
+
+			if (jogador.getDados()[0].obterValorDaFace() == jogador.getDados()[1].obterValorDaFace()){
+				JogadorDaVez jdv = new JogadorDaVez(jogador.getNome() + " Jogando (Dados Iguais)", "Propriedades: " + jogador.getPropriedades().size(), "Saldo: R$ " + jogador.getContaBancaria().getSaldo(), "Status: Jogador Livre");
+				jdv.setVisible(true);
+				jogador.lancarDados();
+				jogador.getFichaCriminal().setNumDelitos(jogador.getFichaCriminal().getNumDelitos()+1);
+				this.jogadorRealizaTurno(jogador);
+
+			} else {
+				jogador.getFichaCriminal().setNumDelitos(0);
+			}
 		}
 	}
 
@@ -254,5 +272,10 @@ public class ControlBancoImobiliario {
 
 	public void changeHasSetedNumJogadores(){
 		this.hasSetedNumJogadores = true;
+	}
+
+	@Override
+	public void update(JogadorHumano jogador) {
+		System.out.println("Tem que se antes");
 	}
 }

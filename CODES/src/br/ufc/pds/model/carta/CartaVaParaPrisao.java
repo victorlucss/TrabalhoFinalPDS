@@ -1,7 +1,7 @@
-package br.ufc.pds.entity.carta;
+package br.ufc.pds.model.carta;
 
 import br.ufc.pds.controller.ControlBancoImobiliario;
-import br.ufc.pds.entity.jogador.JogadorHumano;
+import br.ufc.pds.model.jogador.JogadorHumano;
 
 public class CartaVaParaPrisao extends Carta {
 

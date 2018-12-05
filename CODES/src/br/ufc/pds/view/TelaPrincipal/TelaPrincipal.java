@@ -2,9 +2,9 @@ package br.ufc.pds.view.TelaPrincipal;
 
 import JGamePlay.GameImage;
 import JGamePlay.Window;
-import br.ufc.pds.entity.campo.propriedade.Propriedade;
-import br.ufc.pds.entity.campo.propriedade.Terreno;
-import br.ufc.pds.entity.jogador.JogadorHumano;
+import br.ufc.pds.model.campo.propriedade.Propriedade;
+import br.ufc.pds.model.campo.propriedade.Terreno;
+import br.ufc.pds.model.jogador.JogadorHumano;
 import br.ufc.pds.pojo.Peca;
 
 public class TelaPrincipal {

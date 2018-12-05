@@ -1,6 +1,6 @@
 package br.ufc.pds.factory;
 
-import br.ufc.pds.entity.carta.*;
+import br.ufc.pds.model.carta.*;
 
 public class FactoryCartas {
 	private static FactoryCartas factoryCartas = new FactoryCartas();

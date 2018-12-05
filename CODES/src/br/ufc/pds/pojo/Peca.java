@@ -1,6 +1,6 @@
 package br.ufc.pds.pojo;
 
-import br.ufc.pds.entity.campo.Campo;
+import br.ufc.pds.model.campo.Campo;
 
 public class Peca {
 

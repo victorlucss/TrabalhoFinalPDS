@@ -1,6 +1,6 @@
-package br.ufc.pds.entity.campo;
+package br.ufc.pds.model.campo;
 
-import br.ufc.pds.entity.jogador.JogadorHumano;
+import br.ufc.pds.model.jogador.JogadorHumano;
 
 import java.util.ArrayList;
 

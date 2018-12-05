@@ -1,15 +1,13 @@
-package br.ufc.pds.entity.campo.propriedade;
+package br.ufc.pds.model.campo.propriedade;
 
 import br.ufc.pds.controller.ControlBancoImobiliario;
-import br.ufc.pds.entity.campo.EfeitoEspecial;
-import br.ufc.pds.entity.jogador.Banco;
-import br.ufc.pds.entity.jogador.Jogador;
-import br.ufc.pds.entity.jogador.JogadorHumano;
+import br.ufc.pds.model.campo.EfeitoEspecial;
+import br.ufc.pds.model.jogador.Banco;
+import br.ufc.pds.model.jogador.Jogador;
+import br.ufc.pds.model.jogador.JogadorHumano;
 import br.ufc.pds.view.*;
-import br.ufc.pds.view.TelaPrincipal.TelaPrincipal;
 
 import javax.swing.*;
-import java.util.Scanner;
 
 public class Terreno extends Propriedade implements EfeitoEspecial {
 
@@ -68,13 +66,6 @@ public class Terreno extends Propriedade implements EfeitoEspecial {
     }
 
     public void acoesProprietario () {
-//        System.out.println("Esse Terreno é Seu!");
-//	    System.out.println("Escolha:");
-//        System.out.println("1- Construir Casa");
-//        System.out.println("0- Encerrar Turno.");
-//        Scanner input = new Scanner(System.in);
-//        int escolha = Integer.parseInt(input.nextLine());
-
         RealizarConstrução constuir = new RealizarConstrução(((JogadorHumano)this.dono).getNome()+" - Essa Propriedade é sua",  this.getNome(), "Saldo R$" + this.dono.getContaBancaria().getSaldo());
         constuir.setVisible(true);
 
@@ -138,9 +129,13 @@ public class Terreno extends Propriedade implements EfeitoEspecial {
             }
         } else {
             //IMPLEMENTAR AÇÕES PARA QUANDO O USUÁRIO NÃO TIVER MAIS DINHEIRO--------------------------------------------------------------------------------------
-            JOptionPane.showMessageDialog(null,jogador.getNome()+" encerrou o Turno e pagou R$ " + this.getAluguel() + " de aluguel");
-            jogador.pagar(this.getAluguel());
-            this.dono.receber(this.getAluguel());
+
+            if (jogador.pagarCredor(this.getAluguel())) {
+                JOptionPane.showMessageDialog(null,jogador.getNome()+" encerrou o Turno e pagou R$ " + this.getAluguel() + " de aluguel");
+                this.dono.receber(this.getAluguel());
+            }
+            //jogador.pagar(this.getAluguel());
+
         }
     }
 

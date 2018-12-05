@@ -1,6 +1,6 @@
 package br.ufc.pds.controller;
 
-import br.ufc.pds.entity.carta.Carta;
+import br.ufc.pds.model.carta.Carta;
 import br.ufc.pds.factory.FactoryCartas;
 import br.ufc.pds.interfaces.Iterator;
 

@@ -1,6 +1,4 @@
-package br.ufc.pds.entity.campo.campo_especial;
-
-import java.util.ArrayList;
+package br.ufc.pds.model.campo.campo_especial;
 
 public class ParadaLivre extends CampoEspecial {
 
