@@ -37,18 +37,18 @@ public class TelaPrincipal {
 
     public void renderProprietario(Propriedade propriedade) {
         GameImage marcador = new GameImage("resources//marcador//"+ ((JogadorHumano)propriedade.getDono()).getPeca().getCor() +".png");
-        marcador.setPosition(propriedade.getEixoX(), propriedade.getEixoY());
+        marcador.setPosition(propriedade.getEixoX()-10, propriedade.getEixoY()-10);
         marcador.draw();
     }
 
     public void renderCasasHoteis(Terreno terreno) {
-        GameImage marcador;
+        GameImage marcador;//
         if (!terreno.isHasHotel()) {
             marcador = new GameImage("resources//casas//"+ ((JogadorHumano)terreno.getDono()).getPeca().getCor() + "Casa" + terreno.getNumCasas() +".png");
         } else {
             marcador = new GameImage("resources//hotel//"+ ((JogadorHumano)terreno.getDono()).getPeca().getCor() +"Hotel.png");
         }
-        marcador.setPosition(terreno.getEixoX(), terreno.getEixoY());
+        marcador.setPosition(terreno.getEixoX()-10, terreno.getEixoY()+15);
         marcador.draw();
     }
 }

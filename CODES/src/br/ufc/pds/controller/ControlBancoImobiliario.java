@@ -235,20 +235,17 @@ public class ControlBancoImobiliario {
 		ArrayList<Campo> camposIndisponiveis = new ArrayList<>();
 
 		this.tabuleiro.getCampos().forEach((key, campo) -> {
-			System.out.println("Verificar aki"); //remover---------------------------------------------------------
-			if (campo instanceof Terreno && campo!=terreno) {
-				System.out.println("1"); //remover---------------------------------------------------------
+			if (campo instanceof Terreno) {
 				if (((Terreno) campo).getCor().equals(terreno.getCor())) {
-					System.out.println("2"); //remover---------------------------------------------------------
-					if(jogador != terreno.getDono() || terreno.getNumCasas() > ((Terreno) campo).getNumCasas()) {
-						System.out.println("3"); //remover---------------------------------------------------------
+					System.out.println("Terreno Atual: "+terreno.getNumCasas()+" - " + "Terreno Iterado: "+((Terreno) campo).getNumCasas());
+					if(!jogador.equals(((Terreno)campo).getDono()) || terreno.getNumCasas() > ((Terreno) campo).getNumCasas()) {
 						camposIndisponiveis.add(campo);
 					}
 				}
 			}
 		});
 
-		return !camposIndisponiveis.isEmpty();
+		return camposIndisponiveis.isEmpty();
 	}
 
 	public Tabuleiro getTabuleiro() {
