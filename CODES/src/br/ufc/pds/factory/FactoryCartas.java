@@ -8,6 +8,7 @@ public class FactoryCartas {
 	private FactoryCartas() {}
 
 	public static synchronized FactoryCartas getInstance() {
+		if(factoryCartas == null) factoryCartas =  new FactoryCartas();
 		return factoryCartas;
 	}
 

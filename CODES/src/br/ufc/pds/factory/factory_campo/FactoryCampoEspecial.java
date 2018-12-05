@@ -9,6 +9,7 @@ public class FactoryCampoEspecial {
     private FactoryCampoEspecial() {}
 
     public static synchronized FactoryCampoEspecial getInstance() {
+        if(factoryCampoEspecial == null) factoryCampoEspecial = new FactoryCampoEspecial();
         return factoryCampoEspecial;
     }
 
