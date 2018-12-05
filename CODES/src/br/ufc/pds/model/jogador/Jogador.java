@@ -1,6 +1,6 @@
 package br.ufc.pds.model.jogador;
 
-import br.ufc.pds.pojo.ContaBancaria;
+import br.ufc.pds.model.ContaBancaria;
 import br.ufc.pds.model.campo.propriedade.Propriedade;
 
 import java.util.ArrayList;

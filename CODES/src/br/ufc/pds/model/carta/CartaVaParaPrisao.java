@@ -13,7 +13,6 @@ public class CartaVaParaPrisao extends Carta {
 
 	public void acao(JogadorHumano jogador) {
 		ControlBancoImobiliario.getInstance().prenderJogador(jogador);
-		//System.out.println(jogador.getNome()+" foi Preso!");
 		this.showCarta(this.titulo, this.descricao, jogador.getNome() + " foi Preso!");
 	}
 

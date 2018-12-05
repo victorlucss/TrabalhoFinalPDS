@@ -22,17 +22,7 @@ public class ControlSorteOuReves implements Iterator {
 		return controlSorteOuReves;
 	}
 
-	public Carta sortearCarta() {
-		if (cartas.isEmpty()) {
-			this.criarCartas();
-		}
-		System.out.println("Ainda há " + this.cartas.size() + " cartas");
-		Random random = new Random();
-		int i = random.nextInt(this.cartas.size());
-		return this.cartas.remove(i);
-	}
-
-	public void criarCartas() {
+	private void criarCartas() {
 		this.cartas.add(FactoryCartas.getInstance().criar("Sorte", "A prefetura mandou abrir uma nova avenida, para o que desapropriou vários prédios. Em consequencia seu terreno valorizou", "Sorte", 25));
 		this.cartas.add(FactoryCartas.getInstance().criar("Reves", "Papai os livros do ano passado não servem mais, preciso de livros novos", "Reves", 40));
 		this.cartas.add(FactoryCartas.getInstance().criar("Reves", "Seus filhos já vão para a escola. Pague a primeira mensalidade.", "Reves", 50));
@@ -70,7 +60,12 @@ public class ControlSorteOuReves implements Iterator {
 
 	@Override
 	public Object next() {
-		return null;
+		if (cartas.isEmpty()) {
+			this.criarCartas();
+		}
+		Random random = new Random();
+		int i = random.nextInt(this.cartas.size());
+		return this.cartas.remove(i);
 	}
 
 	@Override

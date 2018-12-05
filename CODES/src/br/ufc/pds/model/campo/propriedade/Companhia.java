@@ -1,7 +1,6 @@
 package br.ufc.pds.model.campo.propriedade;
 
-import br.ufc.pds.Teste;
-import br.ufc.pds.model.campo.EfeitoEspecial;
+import br.ufc.pds.interfaces.EfeitoEspecial;
 import br.ufc.pds.model.jogador.Banco;
 import br.ufc.pds.model.jogador.Jogador;
 import br.ufc.pds.model.jogador.JogadorHumano;
@@ -58,20 +57,17 @@ public class Companhia extends Propriedade implements EfeitoEspecial {
                         this.dono = jogador;
                     } else {
                         JOptionPane.showMessageDialog(null,((JogadorHumano) this.dono).getNome() + " recusou sua proposta.");
+                        this.computarTaxa(jogador);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null,jogador.getNome() + " desistiu da compra.");
+                    this.computarTaxa(jogador);
                 }
-
 
 			} else  {
-				float taxaCobrada = this.taxa * (jogador.getDados()[0].obterValorDaFace() + jogador.getDados()[1].obterValorDaFace());
-				if (jogador.pagarCredor(taxaCobrada)) {
-                    JOptionPane.showMessageDialog(null,jogador.getNome()+" pagou R$" + taxaCobrada);
-                    this.dono.receber(taxaCobrada);
-                }
+			    this.computarTaxa(jogador);
 			}
-		} else if(!this.dono.equals(jogador)) {
+		} else if(!this.dono.equals(jogador) && this.dono.equals(Banco.getInstance())) {
             String titulo = jogador.getNome() + " alcançou " + this.nome;
             String taxa = "Taxa: R$ "+this.taxa;
             String valor = "Valor: R$ "+this.preco;
@@ -98,6 +94,14 @@ public class Companhia extends Propriedade implements EfeitoEspecial {
 			}
 		} else {
             JOptionPane.showMessageDialog(null,jogador.getNome()+" visitou sua Companhia");
+        }
+    }
+
+    private void computarTaxa(JogadorHumano jogador){
+        float taxaCobrada = this.taxa * (jogador.getDados()[0].obterValorDaFace() + jogador.getDados()[1].obterValorDaFace());
+        if (jogador.pagarCredor(taxaCobrada)) {
+            JOptionPane.showMessageDialog(null,jogador.getNome()+" pagou R$" + taxaCobrada);
+            this.dono.receber(taxaCobrada);
         }
     }
 }

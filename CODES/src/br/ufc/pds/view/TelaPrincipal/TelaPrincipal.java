@@ -5,7 +5,7 @@ import JGamePlay.Window;
 import br.ufc.pds.model.campo.propriedade.Propriedade;
 import br.ufc.pds.model.campo.propriedade.Terreno;
 import br.ufc.pds.model.jogador.JogadorHumano;
-import br.ufc.pds.pojo.Peca;
+import br.ufc.pds.model.Peca;
 
 public class TelaPrincipal {
     private Window janelaPrincipal;
@@ -50,5 +50,9 @@ public class TelaPrincipal {
         }
         marcador.setPosition(terreno.getEixoX()-10, terreno.getEixoY()+15);
         marcador.draw();
+    }
+
+    public void closeJanela() {
+        this.janelaPrincipal.exit();
     }
 }

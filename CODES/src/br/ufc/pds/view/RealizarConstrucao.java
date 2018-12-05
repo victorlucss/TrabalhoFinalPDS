@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class RealizarConstrução extends JDialog {
+public class RealizarConstrucao extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -13,7 +13,7 @@ public class RealizarConstrução extends JDialog {
     private JLabel labelSaldo;
     private boolean constuir;
 
-    public RealizarConstrução(String propriedade, String nomePropriedade, String saldo) {
+    public RealizarConstrucao(String propriedade, String nomePropriedade, String saldo) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);

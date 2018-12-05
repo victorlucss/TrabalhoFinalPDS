@@ -1,6 +1,6 @@
 package br.ufc.pds.model.campo.campo_especial;
 
-import br.ufc.pds.model.campo.EfeitoEspecial;
+import br.ufc.pds.interfaces.EfeitoEspecial;
 import br.ufc.pds.model.jogador.Banco;
 import br.ufc.pds.model.jogador.JogadorHumano;
 
@@ -16,8 +16,8 @@ public class ImpostoDeRenda extends CampoEspecial implements EfeitoEspecial {
 
         this.showMensagem(titulo, acao);
 
-        Banco.getInstance().receber(200);
-        jogador.pagar(200);
+        if (jogador.pagarCredor(200)) {
+            Banco.getInstance().receber(200);
+        }
     }
-
 }

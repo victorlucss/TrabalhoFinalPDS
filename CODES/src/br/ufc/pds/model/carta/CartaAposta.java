@@ -20,9 +20,9 @@ public class CartaAposta extends Carta {
 		Map<Integer, JogadorHumano> listaJogadores = ControlBancoImobiliario.getInstance().getJogadoresAtivos();
 		listaJogadores.forEach((key, value) -> {
 			if (jogador != value) {
-				value.pagar(this.valor);
-				jogador.receber(this.valor);
-				System.out.println(jogador.getNome() + " recebeu R$" + this.valor + " de " + value.getNome());
+				if (value.pagarCredor(this.valor)){
+					jogador.receber(this.valor);
+				}
 			}
 		});
 		this.showCarta(this.titulo, this.descricao, jogador.getNome() + " Recebeu R$ 50 de cada Jogador.");

@@ -9,11 +9,9 @@ public class Reves extends CartaSorteOuReves {
     }
 
     public void acao(JogadorHumano jogador) {
-//        jogador.pagar(this.valor);
         if (jogador.pagarCredor(this.valor)){
             Banco.getInstance().receber(this.valor);
         }
-        //System.out.println(jogador.getNome() + " pagou R$ " + this.valor);
         this.showCarta(this.titulo, this.descricao, jogador.getNome() + " pagou R$ " + this.valor);
     }
 }

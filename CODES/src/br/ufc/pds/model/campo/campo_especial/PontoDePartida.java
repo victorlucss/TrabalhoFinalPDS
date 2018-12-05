@@ -1,6 +1,6 @@
 package br.ufc.pds.model.campo.campo_especial;
 
-import br.ufc.pds.model.campo.EfeitoEspecial;
+import br.ufc.pds.interfaces.EfeitoEspecial;
 import br.ufc.pds.model.jogador.Banco;
 import br.ufc.pds.model.jogador.JogadorHumano;
 

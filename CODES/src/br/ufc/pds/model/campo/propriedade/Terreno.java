@@ -1,7 +1,7 @@
 package br.ufc.pds.model.campo.propriedade;
 
 import br.ufc.pds.controller.ControlBancoImobiliario;
-import br.ufc.pds.model.campo.EfeitoEspecial;
+import br.ufc.pds.interfaces.EfeitoEspecial;
 import br.ufc.pds.model.jogador.Banco;
 import br.ufc.pds.model.jogador.Jogador;
 import br.ufc.pds.model.jogador.JogadorHumano;
@@ -66,7 +66,7 @@ public class Terreno extends Propriedade implements EfeitoEspecial {
     }
 
     public void acoesProprietario () {
-        RealizarConstrução constuir = new RealizarConstrução(((JogadorHumano)this.dono).getNome()+" - Essa Propriedade é sua",  this.getNome(), "Saldo R$" + this.dono.getContaBancaria().getSaldo());
+        RealizarConstrucao constuir = new RealizarConstrucao(((JogadorHumano)this.dono).getNome()+" - Essa Propriedade é sua",  this.getNome(), "Saldo R$" + this.dono.getContaBancaria().getSaldo());
         constuir.setVisible(true);
 
         if (constuir.isConstuir()) {
@@ -206,5 +206,13 @@ public class Terreno extends Propriedade implements EfeitoEspecial {
 
     public boolean isHasHotel() {
 	    return this.hasHotel;
+    }
+
+    public float getPrecoCasa() {
+	    return this.precoCasa;
+    }
+
+    public float getPrecoHotel() {
+	    return this.precoHotel;
     }
 }

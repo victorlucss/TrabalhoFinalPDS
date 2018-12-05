@@ -1,4 +1,4 @@
-package br.ufc.pds.pojo;
+package br.ufc.pds.model;
 
 public class FichaCriminal {
     private int numDelitos;

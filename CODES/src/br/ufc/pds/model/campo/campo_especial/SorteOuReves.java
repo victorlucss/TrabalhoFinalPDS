@@ -1,7 +1,7 @@
 package br.ufc.pds.model.campo.campo_especial;
 
 import br.ufc.pds.controller.ControlSorteOuReves;
-import br.ufc.pds.model.campo.EfeitoEspecial;
+import br.ufc.pds.interfaces.EfeitoEspecial;
 import br.ufc.pds.model.carta.Carta;
 import br.ufc.pds.model.jogador.JogadorHumano;
 
@@ -14,7 +14,7 @@ public class SorteOuReves extends CampoEspecial implements EfeitoEspecial {
 	}
 
 	public void aplicarEfeito(JogadorHumano jogador) {
-		Carta sorteda = this.controlSorteOuReves.sortearCarta();
+		Carta sorteda = (Carta) this.controlSorteOuReves.next();
 //		System.out.println("Carta " + sorteda.getTitulo() + "\nDescricao: " + sorteda.getDescricao());
 		sorteda.acao(jogador);
 	}

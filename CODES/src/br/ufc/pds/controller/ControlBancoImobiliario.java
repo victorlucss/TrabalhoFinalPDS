@@ -4,23 +4,20 @@ import br.ufc.pds.Teste;
 import br.ufc.pds.interfaces.ObserverJogador;
 import br.ufc.pds.model.Tabuleiro;
 import br.ufc.pds.model.campo.Campo;
-import br.ufc.pds.model.campo.EfeitoEspecial;
+import br.ufc.pds.interfaces.EfeitoEspecial;
 import br.ufc.pds.model.campo.propriedade.Propriedade;
 import br.ufc.pds.model.campo.propriedade.Terreno;
 import br.ufc.pds.model.jogador.Banco;
 import br.ufc.pds.model.jogador.JogadorHumano;
-import br.ufc.pds.pojo.Dado;
-import br.ufc.pds.pojo.Peca;
+import br.ufc.pds.model.Dado;
+import br.ufc.pds.model.Peca;
 import br.ufc.pds.view.EntraComJogador;
 import br.ufc.pds.view.JogadorDaVez;
-import br.ufc.pds.view.SelecionarQuantidadeDeJogadoresPanel;
+import br.ufc.pds.view.SelecionarQtdJogadores;
 import br.ufc.pds.view.TelaPrincipal.TelaPrincipal;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ControlBancoImobiliario implements ObserverJogador {
 	private static ControlBancoImobiliario controlBancoImobiliario = new ControlBancoImobiliario();
@@ -49,12 +46,10 @@ public class ControlBancoImobiliario implements ObserverJogador {
 
 	public void jogar() {
 
-		SelecionarQuantidadeDeJogadoresPanel SQDPanel = new SelecionarQuantidadeDeJogadoresPanel();
-		SQDPanel.run();
+        SelecionarQtdJogadores SQTSpinner = new SelecionarQtdJogadores(2,6);
+        SQTSpinner.setVisible(true);
 
-		while (!this.hasSetedNumJogadores){
-			System.out.println(this.numJogadores);
-		}
+        this.numJogadores = SQTSpinner.getQtdJogadores();
 
 		for(int i=1; i<=this.numJogadores; i++) {
 			EntraComJogador entraComJogador = new EntraComJogador();
@@ -63,7 +58,7 @@ public class ControlBancoImobiliario implements ObserverJogador {
 
         this.telaPrincipal = TelaPrincipal.getInstance(); //Instancia Tela Principal
 
-		while(true) {
+		while(this.jogadoresAtivos.size()>1) {
 			this.iniciarRodada();
 		}
 	}
@@ -95,26 +90,30 @@ public class ControlBancoImobiliario implements ObserverJogador {
 		jogadorHumano.addObserver(this);
 	}
 
-	public void iniciarRodada() {
-		this.jogadoresAtivos.forEach((key, value) -> {
-            this.renderizarTelaPrincipal();
-            JogadorDaVez jdv;
+	private void iniciarRodada() {
+		try {
+            this.jogadoresAtivos.forEach((key, value) -> {
+                this.renderizarTelaPrincipal();
+                JogadorDaVez jdv;
 
-		    if (!(this.getJogadoresPresos().containsValue(value))) {
-                jdv = new JogadorDaVez(value.getNome() + " Jogando", "Propriedades: " + value.getPropriedades().size(), "Saldo: R$ " + value.getContaBancaria().getSaldo(), "Status: Jogador Livre");
-                jdv.setVisible(true);
-                value.lancarDados();
-                this.jogadorRealizaTurno(value);
-            } else {
-                jdv = new JogadorDaVez(value.getNome() + " Jogando", "Propriedades: " + value.getPropriedades().size(), "Saldo: R$ " + value.getContaBancaria().getSaldo(), "Status: Jogador Preso");
-                jdv.setVisible(true);
-                value.lancarDados();
-                this.jogadorPresoRealizaTurno(value);
-            }
-		});
+                if (!(this.getJogadoresPresos().containsValue(value))) {
+                    jdv = new JogadorDaVez(value.getNome() + " Jogando", "Propriedades: " + value.getPropriedades().size(), "Saldo: R$ " + value.getContaBancaria().getSaldo(), "Status: Jogador Livre");
+                    jdv.setVisible(true);
+                    value.lancarDados();
+                    this.jogadorRealizaTurno(value);
+                } else {
+                    jdv = new JogadorDaVez(value.getNome() + " Jogando", "Propriedades: " + value.getPropriedades().size(), "Saldo: R$ " + value.getContaBancaria().getSaldo(), "Status: Jogador Preso");
+                    jdv.setVisible(true);
+                    value.lancarDados();
+                    this.jogadorPresoRealizaTurno(value);
+                }
+            });
+        } catch (ConcurrentModificationException e) {
+
+        }
 	}
 
-	public void jogadorPresoRealizaTurno(JogadorHumano jogador) {
+	private void jogadorPresoRealizaTurno(JogadorHumano jogador) {
         if (jogador.getCartaPrisao() != null) {
             jogador.setCartaPrisao(null);
             this.soltarJogador(jogador);
@@ -128,12 +127,13 @@ public class ControlBancoImobiliario implements ObserverJogador {
             JOptionPane.showMessageDialog(null, jogador.getNome() + " saiu da Prisão (Dados Iguais)");
 
         } else if (jogador.getFichaCriminal().getRodadasPreso() >= 3) {
-            jogador.getContaBancaria().pagar(50); //IMPLEMENTAR QUANDO O JOGADOR NÃO TIVER MAIS CONDIÇÕES PARA PAGAR
-            Banco.getInstance().receber(50);
-			this.soltarJogador(jogador);
-			jogador.getFichaCriminal().setRodadasPreso(0);
-			this.alterarPosicaoDoJogador(jogador);
-            JOptionPane.showMessageDialog(null, jogador.getNome() + " saiu da Prisão (Pagou R$ 50,00 ao Banco)");
+        	if (jogador.pagarCredor(50)) {
+				Banco.getInstance().receber(50);
+				this.soltarJogador(jogador);
+				jogador.getFichaCriminal().setRodadasPreso(0);
+				this.alterarPosicaoDoJogador(jogador);
+				JOptionPane.showMessageDialog(null, jogador.getNome() + " saiu da Prisão (Pagou R$ 50,00 ao Banco)");
+			}
         } else {
             int delitos = jogador.getFichaCriminal().getRodadasPreso() + 1;
             System.out.println(delitos + " - " + jogador.getNome());
@@ -154,7 +154,7 @@ public class ControlBancoImobiliario implements ObserverJogador {
 			try {
 				this.executaAcaoCampo((EfeitoEspecial) proximoCampo, jogador); //Aciona o efeito especial para o Jogador...
 			} catch (ClassCastException e) {
-				System.out.println("Campo sem Ação!"); // Caso caia em Paradav Livre
+                JOptionPane.showMessageDialog(null, jogador.getNome() + " passou por "+proximoCampo.getNome());
 			}
 		}
 	}
@@ -165,7 +165,6 @@ public class ControlBancoImobiliario implements ObserverJogador {
         jogador.getPeca().obterLocalizacao().removerJogador(jogador); //Remove o jogador do campo em que ele estava
 
         Campo proximoCampo = this.tabuleiro.obterProximoCampo(jogador.getPeca().obterLocalizacao(), valorDados);
-//        Campo proximoCampo = this.tabuleiro.obterProximoCampo(this.tabuleiro.obterCampoInicial(), 5); // NÃO REMOVERLinha usada apenas para testes
         jogador.getPeca().mudarLocalizacao(proximoCampo);
         Teste.informaAvancoJogador(jogador);//remover-------------------------------------------
 
@@ -177,10 +176,9 @@ public class ControlBancoImobiliario implements ObserverJogador {
 
 	private void executaAcaoCampo(EfeitoEspecial campo, JogadorHumano jogador) {
 		if (campo!=null) {
-			//System.out.println("Testando Aplicar Efeito");
 			campo.aplicarEfeito(jogador);
 
-			if (jogador.getDados()[0].obterValorDaFace() == jogador.getDados()[1].obterValorDaFace()){
+			if (jogador.getDados()[0].obterValorDaFace() == jogador.getDados()[1].obterValorDaFace() && this.jogadoresAtivos.containsValue(jogador)){
 				JogadorDaVez jdv = new JogadorDaVez(jogador.getNome() + " Jogando (Dados Iguais)", "Propriedades: " + jogador.getPropriedades().size(), "Saldo: R$ " + jogador.getContaBancaria().getSaldo(), "Status: Jogador Livre");
 				jdv.setVisible(true);
 				jogador.lancarDados();
@@ -216,7 +214,7 @@ public class ControlBancoImobiliario implements ObserverJogador {
         return (ArrayList) coresList;
     }
 
-    public boolean corUsada(String cor){
+    private boolean corUsada(String cor){
         for (int i = 0; i < jogadoresAtivos.size(); i++) {
             if(jogadoresAtivos.get(i).getPeca().getCor().equals(cor)){
                 return true;
@@ -275,7 +273,42 @@ public class ControlBancoImobiliario implements ObserverJogador {
 	}
 
 	@Override
-	public void update(JogadorHumano jogador) {
-		System.out.println("Tem que se antes");
+	public void update(JogadorHumano jogador, float valor) {
+	    System.out.println(jogador.getNome()+" está devendo R$ "+valor);
+	    float propriedadesVendidas = 0;
+
+		if (jogador.getPropriedades().isEmpty()) {
+			JOptionPane.showMessageDialog(null, jogador.getNome() + " foi à falência (Sem dinheiro para pagar os credores).");
+			this.jogadoresAtivos.remove(jogador.getId());
+			jogador.getPeca().obterLocalizacao().removerJogador(jogador);
+		} else {
+			for (Propriedade propriedade: jogador.getPropriedades()) {
+                if (propriedade instanceof Terreno) {
+                    if (((Terreno) propriedade).isHasHotel()) {
+                        propriedadesVendidas += ((4 * ((Terreno) propriedade).getPrecoCasa() + ((Terreno) propriedade).getPrecoHotel())/2);
+                        propriedadesVendidas += propriedade.getPreco();
+                    } else {
+                        propriedadesVendidas += ((((Terreno) propriedade).getNumCasas() * ((Terreno) propriedade).getPrecoCasa())/2);
+                        propriedadesVendidas += propriedade.getPreco();
+                        System.out.println("Sem Hotel: "+propriedadesVendidas);
+                    }
+                } else {
+                    propriedadesVendidas += propriedade.getPreco();
+                }
+                JOptionPane.showMessageDialog(null, jogador.getNome()+" vendeu "+propriedade.getNome()+" por "+propriedadesVendidas+" para pagar suas dívidas");
+                if (propriedadesVendidas >= valor) {
+                    Banco.getInstance().pagar(propriedadesVendidas);
+                    jogador.receber(propriedadesVendidas);
+                    JOptionPane.showMessageDialog(null, jogador.getNome()+" pagou sua dívida e continua no jogo!");
+                    break;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Dinheiro Insificiente Para Pagar O Credor");
+                }
+			}
+		}
+		if (this.jogadoresAtivos.size() == 1) {
+            JOptionPane.showMessageDialog(null, "<Alguém> ganhou essa partida");
+            TelaPrincipal.getInstance().closeJanela();
+        }
 	}
 }

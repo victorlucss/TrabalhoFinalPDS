@@ -20,6 +20,8 @@ public class EntraComJogador extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+        setBounds(500, 300, 550, 180);
+
         ArrayList<String> cores = ControlBancoImobiliario.getInstance().getCores();
         for (int i = 0; i < cores.size(); i++) {
             corJogador.addItem(cores.get(i));

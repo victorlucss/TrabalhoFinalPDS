@@ -1,4 +1,4 @@
-package br.ufc.pds.pojo;
+package br.ufc.pds.model;
 
 import java.util.Random;
 

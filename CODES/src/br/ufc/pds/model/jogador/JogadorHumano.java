@@ -4,10 +4,10 @@ import br.ufc.pds.interfaces.ObserverJogador;
 import br.ufc.pds.interfaces.SubjectObserver;
 import br.ufc.pds.model.campo.propriedade.Propriedade;
 import br.ufc.pds.model.carta.Carta;
-import br.ufc.pds.pojo.ContaBancaria;
-import br.ufc.pds.pojo.FichaCriminal;
-import br.ufc.pds.pojo.Peca;
-import br.ufc.pds.pojo.Dado;
+import br.ufc.pds.model.ContaBancaria;
+import br.ufc.pds.model.FichaCriminal;
+import br.ufc.pds.model.Peca;
+import br.ufc.pds.model.Dado;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class JogadorHumano extends Jogador implements SubjectObserver {
 		this.peca = peca;
 		this.dados = dados;
 		this.cartaPrisao = null;
-		this.contaBancaria = new ContaBancaria(1500);
+		this.contaBancaria = new ContaBancaria(300);
 		this.propriedades = new ArrayList<>();
 		this.fichaCriminal = new FichaCriminal();
 		this.observerCollection = new ArrayList<>();
@@ -37,14 +37,14 @@ public class JogadorHumano extends Jogador implements SubjectObserver {
 	public void lancarDados() {
 		this.dados[0].lancar();
 		this.dados[1].lancar();
-		System.out.println("Valor do Dado: " + (dados[0].obterValorDaFace() + dados[1].obterValorDaFace()));
-		//return dados[0].obterValorDaFace() + dados[1].obterValorDaFace();
 	}
 
 	public boolean pagarCredor(float valor) {
+		System.out.println("Saldo antes R$:" + this.contaBancaria.getSaldo());
 	    if (this.getContaBancaria().getSaldo() < valor) {
-            this.notifyObserver();
+            this.notifyObserver(valor);
         }
+        System.out.println("Saldo depois R$:" + this.contaBancaria.getSaldo());
         return this.pagar(valor);
     }
 
@@ -96,9 +96,9 @@ public class JogadorHumano extends Jogador implements SubjectObserver {
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObserver(float valor) {
         for (ObserverJogador object: this.observerCollection) {
-            object.update(this);
+            object.update(this, valor);
         }
     }
 }
