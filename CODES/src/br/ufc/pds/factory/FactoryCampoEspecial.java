@@ -4,7 +4,7 @@ import br.ufc.pds.model.campo.Campo;
 import br.ufc.pds.model.campo.campo_especial.*;
 
 public class FactoryCampoEspecial {
-    private static FactoryCampoEspecial factoryCampoEspecial = new FactoryCampoEspecial();
+    private static FactoryCampoEspecial factoryCampoEspecial = null;
 
     private FactoryCampoEspecial() {}
 
